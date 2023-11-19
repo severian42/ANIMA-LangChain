@@ -18,10 +18,8 @@ import { DuckDuckGo } from "@/app/api/langchain-tools/duckduckgo_search";
 import { WebBrowser } from "langchain/tools/webbrowser";
 import { Calculator } from "langchain/tools/calculator";
 import { DynamicTool, Tool } from "langchain/tools";
-import { DallEAPIWrapper } from "@/app/api/langchain-tools/dalle_image_generator";
 import { BaiduSearch } from "@/app/api/langchain-tools/baidu_search";
 import { GoogleSearch } from "@/app/api/langchain-tools/google_search";
-import { StableDiffusionWrapper } from "@/app/api/langchain-tools/stable_diffusion_image_generator";
 import { ArxivAPIWrapper } from "@/app/api/langchain-tools/arxiv";
 
 const serverConfig = getServerSideConfig();
