@@ -229,27 +229,10 @@ async function handle(req: NextRequest) {
     ];
     const webBrowserTool = new WebBrowser({ model, embeddings });
     const calculatorTool = new Calculator();
-    const dallEAPITool = new DallEAPIWrapper(
-      apiKey,
-      baseUrl,
-      async (data: string) => {
-        var response = new ResponseBody();
-        response.message = data;
-        await writer.ready;
-        await writer.write(
-          encoder.encode(`data: ${JSON.stringify(response)}\n\n`),
-        );
-      },
-    );
-    dallEAPITool.returnDirect = true;
-    const stableDiffusionTool = new StableDiffusionWrapper();
     const arxivAPITool = new ArxivAPIWrapper();
     if (useTools.includes("web-search")) tools.push(searchTool);
     if (useTools.includes(webBrowserTool.name)) tools.push(webBrowserTool);
     if (useTools.includes(calculatorTool.name)) tools.push(calculatorTool);
-    if (useTools.includes(dallEAPITool.name)) tools.push(dallEAPITool);
-    if (useTools.includes(stableDiffusionTool.name))
-      tools.push(stableDiffusionTool);
     if (useTools.includes(arxivAPITool.name)) tools.push(arxivAPITool);
 
     useTools.forEach((toolName) => {
