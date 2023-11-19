@@ -1,9 +1,9 @@
 
 # Your openai api key. (required)
-OPENAI_API_KEY=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
+OPENAI_API_KEY=""
 
 # Access passsword, separated by comma. (optional)
-CODE=0042004200
+CODE=00420042
 
 # You can start service behind a proxy
 PROXY_URL=http://localhost:11434
