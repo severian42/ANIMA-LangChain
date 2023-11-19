@@ -1,6 +1,6 @@
 
 # Your openai api key. (required)
-OPENAI_API_KEY="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"
+OPENAI_API_KEY=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
 
 # Access passsword, separated by comma. (optional)
 CODE=00420042
