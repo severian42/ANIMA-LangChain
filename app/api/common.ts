@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSideConfig } from "../config/server";
 import { DEFAULT_MODELS, OPENAI_BASE_URL } from "../constant";
 import { collectModelTable } from "../utils/model";
-import { makeAzurePath } from "../azure";
 
 const serverConfig = getServerSideConfig();
 
@@ -17,8 +16,7 @@ export async function requestOpenai(req: NextRequest) {
     "",
   );
 
-  let baseUrl =
-    serverConfig.azureUrl || serverConfig.baseUrl || OPENAI_BASE_URL;
+  let baseUrl = serverConfig.baseUrl || OPENAI_BASE_URL;
 
   if (!baseUrl.startsWith("http")) {
     baseUrl = `https://${baseUrl}`;
@@ -38,16 +36,6 @@ export async function requestOpenai(req: NextRequest) {
     },
     10 * 60 * 1000,
   );
-
-  if (serverConfig.isAzure) {
-    if (!serverConfig.azureApiVersion) {
-      return NextResponse.json({
-        error: true,
-        message: `missing AZURE_API_VERSION in server env vars`,
-      });
-    }
-    path = makeAzurePath(path, serverConfig.azureApiVersion);
-  }
 
   const fetchUrl = `${baseUrl}/${path}`;
   const fetchOptions: RequestInit = {
